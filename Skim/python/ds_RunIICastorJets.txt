@@ -1,0 +1,4 @@
+/ReggeGribovPartonMC_castorJet_13TeV-QGSJetII/RunIISpring15DR74-NoPU_castor_MCRUN2_74_V8-v1/AODSIM
+/QCD_Pt-15to3000_castorJet_TuneCUETP8M1_Flat_13TeV-pythia8/RunIISpring15DR74-NoPU_castor_MCRUN2_74_V8-v1/AODSIM
+/ReggeGribovPartonMC_castorJet_13TeV-EPOS/RunIISpring15DR74-NoPU_castor_MCRUN2_74_V8-v1/AODSIM
+/MinBias_TuneCUETP8M1_13TeV-pythia8/RunIISpring15DR74-NoPURaw_castor_MCRUN2_74_V8-v1/AODSIM
