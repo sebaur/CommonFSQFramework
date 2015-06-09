@@ -39,6 +39,10 @@ void CastorRecHitView::fillSpecific(const edm::Event& iEvent, const edm::EventSe
    iSetup.get<CastorChannelQualityRcd>().get(p);
    std::vector<DetId> channels = p->getAllChannels();
 
+   // check for correct collection size
+   if (castorRecHits->size() != 224)
+        return;
+
    // add rechits to tree
     for (unsigned int iRecHit=0; iRecHit < castorRecHits->size(); ++iRecHit) {
         CastorRecHit rh = (*castorRecHits)[iRecHit];

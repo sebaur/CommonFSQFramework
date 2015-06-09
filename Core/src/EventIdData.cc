@@ -12,6 +12,7 @@ EventViewBase(iConfig, tree)
     registerInt("run", tree);
     registerInt("lumi", tree);
     registerInt("event", tree);
+    registerInt("bx", tree);
     registerFloat("genWeight", tree);
 
     registerFloat("alphaQCD", tree);
@@ -38,6 +39,7 @@ void EventIdData::fillSpecific(const edm::Event& iEvent, const edm::EventSetup& 
     setI("run", iEvent.eventAuxiliary().run());
     setI("lumi", iEvent.eventAuxiliary().luminosityBlock());
     setI("event", iEvent.eventAuxiliary().event());
+    setI("bx", iEvent.eventAuxiliary().bunchCrossing());
 
     if (iEvent.isRealData()) return;
 
