@@ -3,6 +3,8 @@
 #include "SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h"
 #include "SimDataFormats/GeneratorProducts/interface/HepMCProduct.h"
 #include "SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h"
+#include "DataFormats/Luminosity/interface/LumiSummary.h"
+#include "DataFormats/Luminosity/interface/LumiDetails.h"
 #include "TLorentzVector.h"
 
 EventIdData::EventIdData(const edm::ParameterSet& iConfig, TTree * tree):
@@ -12,9 +14,13 @@ EventViewBase(iConfig, tree)
     registerInt("run", tree);
     registerInt("lumi", tree);
     registerInt("event", tree);
+<<<<<<< HEAD
     registerInt("bx", tree);
+=======
+    registerInt("bx",tree);
+    
+>>>>>>> upstream/master
     registerFloat("genWeight", tree);
-
     registerFloat("alphaQCD", tree);
     registerFloat("qScale", tree);
     
@@ -25,7 +31,7 @@ EventViewBase(iConfig, tree)
     registerFloat("XiDD", tree);
     registerFloat("cmenergy", tree);
     
-
+    registerFloat("instLumiPerBX",tree);
     registerFloat("puTrueNumInteractions", tree);
     registerFloat("PUNumInteractions", tree);
 
@@ -36,11 +42,28 @@ EventViewBase(iConfig, tree)
 
 void EventIdData::fillSpecific(const edm::Event& iEvent, const edm::EventSetup& iSetup){
 
+    localcount++;
+
+    // common part
     setI("run", iEvent.eventAuxiliary().run());
     setI("lumi", iEvent.eventAuxiliary().luminosityBlock());
     setI("event", iEvent.eventAuxiliary().event());
-    setI("bx", iEvent.eventAuxiliary().bunchCrossing());
-
+    
+    // data only part
+    if (iEvent.isRealData()) {
+    	setI("bx", iEvent.bunchCrossing());
+	try {
+	    // Get instantanious lumi information
+	    edm::LuminosityBlock const& lumiBlock = iEvent.getLuminosityBlock();
+	    edm::Handle<LumiDetails> d;
+	    lumiBlock.getByLabel("lumiProducer",d);	
+	    // This is the call to get the lumi per bx:
+	    setF("instLumiPerPX",d->lumiValue(LumiDetails::kOCC1,iEvent.bunchCrossing()));
+	} catch (...) {
+	    if (localcount == 1) std::cout << " An exception was thrown when accessing the LumiDetails and/or the LumiSummary objects. This means they are not present and are not correctly filled in the ntuple" << std::endl;
+	}
+    }
+    // start MC part
     if (iEvent.isRealData()) return;
 
     // MC only stuff below
@@ -170,9 +193,7 @@ void EventIdData::fillSpecific(const edm::Event& iEvent, const edm::EventSetup& 
         	}
     	}
     } catch (...) {
-    	if (localcount == 0) std::cout << " An exception was thrown when accessing the PileupSummaryInfo object. This means we are probably running on GEN-SIM samples that do not have this information." << std::endl;
+    	if (localcount == 1) std::cout << " An exception was thrown when accessing the PileupSummaryInfo object. This means we are probably running on GEN-SIM samples that do not have this information." << std::endl;
     }
-
-    localcount++;
 
 }
