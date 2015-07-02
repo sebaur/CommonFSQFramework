@@ -15,12 +15,7 @@ EventViewBase(iConfig, tree)
     registerInt("run", tree);
     registerInt("lumi", tree);
     registerInt("event", tree);
-<<<<<<< HEAD
-    registerInt("bx", tree);
-=======
     registerInt("bx",tree);
-    
->>>>>>> upstream/master
     registerFloat("genWeight", tree);
     registerFloat("alphaQCD", tree);
     registerFloat("qScale", tree);
