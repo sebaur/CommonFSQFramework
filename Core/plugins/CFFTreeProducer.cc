@@ -33,13 +33,16 @@
 #include "CommonFSQFramework/Core/interface/RecoTrackView.h"
 #include "CommonFSQFramework/Core/interface/VerticesView.h"
 #include "CommonFSQFramework/Core/interface/CastorRecHitView.h"
+#include "CommonFSQFramework/Core/interface/CastorTowerView.h"
 #include "CommonFSQFramework/Core/interface/CastorJetView.h"
 
 #include "CommonFSQFramework/Core/interface/JetView.h"
+#include "CommonFSQFramework/Core/interface/TrackJetView.h"
 #include "CommonFSQFramework/Core/interface/TriggerResultsView.h"
 #include "CommonFSQFramework/Core/interface/GenericCandidateView.h"
 #include "CommonFSQFramework/Core/interface/HFRecHitView.h"
 #include "CommonFSQFramework/Core/interface/HBHERecHitView.h"
+#include "CommonFSQFramework/Core/interface/EcalRecHitView.h"
 #include "CommonFSQFramework/Core/interface/CaloTowerView.h"
 #include "CommonFSQFramework/Core/interface/PFCandidateView.h"
 #include "CommonFSQFramework/Core/interface/PFClusterView.h"
@@ -117,8 +120,10 @@ CFFTreeProducer::CFFTreeProducer(const edm::ParameterSet& iConfig)
 
         prefixes.insert(prefix);
 
-
-        if (miniViewType == "JetView") {
+        if (miniViewType == "TrackJetView") {
+            m_views.push_back(new TrackJetView(pset, m_tree));
+        }
+        else if (miniViewType == "JetView") {
             m_views.push_back(new JetView(pset, m_tree));
         }
         else if (miniViewType == "TriggerResultsView") {
@@ -142,6 +147,9 @@ CFFTreeProducer::CFFTreeProducer(const edm::ParameterSet& iConfig)
         else if (miniViewType == "CastorRecHitView") {
             m_views.push_back(new CastorRecHitView(pset, m_tree));
         }
+        else if (miniViewType == "CastorTowerView") {
+            m_views.push_back(new CastorTowerView(pset, m_tree));
+        }
         else if (miniViewType == "CastorJetView") {
             m_views.push_back(new CastorJetView(pset, m_tree));
         }
@@ -150,6 +158,9 @@ CFFTreeProducer::CFFTreeProducer(const edm::ParameterSet& iConfig)
 	}
 	else if (miniViewType == "HBHERecHitView") {
             m_views.push_back(new HBHERecHitView(pset, m_tree));
+        }
+        else if (miniViewType == "EcalRecHitView") {
+            m_views.push_back(new EcalRecHitView(pset, m_tree));
         }
 	else if (miniViewType == "CaloTowerView") {
             m_views.push_back(new CaloTowerView(pset, m_tree));

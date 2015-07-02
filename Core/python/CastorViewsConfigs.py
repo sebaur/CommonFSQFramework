@@ -45,6 +45,12 @@ def get(todo):
         src = cms.InputTag("offlinePrimaryVertices"),
     )
 
+    defs["CastorTowerView"]  = cms.PSet(
+        miniView = cms.string("CastorTowerView"),
+        branchPrefix = cms.untracked.string("CastorTower"),
+        inputcoll = cms.InputTag("CastorTowerReco")
+    )
+
     ret = {}
     for t in todo:
         if t not in defs:
