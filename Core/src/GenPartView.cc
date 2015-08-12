@@ -10,7 +10,7 @@ EventViewBase(iConfig,  tree)
     registerVecInt("charge", tree);
     registerVecInt("pdg", tree);
     registerVecInt("status", tree);
-
+    registerVecInt("motherpdg", tree);
     // fetch config data
     m_maxEta = iConfig.getParameter<double>("maxEta");
     m_minPt = iConfig.getParameter<double>("minPt");
@@ -48,7 +48,7 @@ void GenPartView::fillSpecific(const edm::Event& iEvent, const edm::EventSetup& 
         addToIVec("charge", hIn->at(i).charge());
         addToIVec("pdg", hIn->at(i).pdgId());
         addToIVec("status", hIn->at(i).status());
-
+        addToIVec("motherpdg", hIn->at(i).mother()->pdgId());
     }
 
 }
