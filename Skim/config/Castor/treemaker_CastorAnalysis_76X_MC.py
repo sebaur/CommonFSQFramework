@@ -8,7 +8,7 @@ process = cms.Process("Treemaker")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(1002))
 
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
@@ -16,8 +16,9 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 # Source
 process.source = cms.Source("PoolSource",
     #fileNames = cms.untracked.vstring('/store/data/Run2015A/ZeroBias1/RECO/PromptReco-v1/000/247/324/00000/02BDFA64-B40E-E511-8CB7-02163E012ACF.root')
-    fileNames = cms.untracked.vstring('/store/user/sbaur/MinBias_CUETP8M1_13TeV-pythia8/MinBias_CUETP8M1_13TeV-pythia8_MagnetOff_CASTORmeasured_RECO/160207_214204/0000/MinBias_CUETP8M1_13TeV-pythia8_CASTORmeasured_RECO_1.root')
+    #fileNames = cms.untracked.vstring('/store/user/sbaur/MinBias_CUETP8M1_13TeV-pythia8/MinBias_CUETP8M1_13TeV-pythia8_MagnetOff_CASTORmeasured_RECO/160207_214204/0000/MinBias_CUETP8M1_13TeV-pythia8_CASTORmeasured_RECO_1.root')
     #fileNames = cms.untracked.vstring('/store/data/Run2015A/CastorJets/RECO/PromptReco-v1/000/247/607/00000/5AB25486-9410-E511-91D5-02163E0133E6.root')
+    fileNames = cms.untracked.vstring(' root://xrootd-cms.infn.it//store/user/sbaur/MinBias_CUETP8M1_13TeV-pythia8/MinBias_CUETP8M1_13TeV-pythia8_MagnetOff_CASTORmeasured_newCASTORnoise_RECO/160509_142601/0000/MinBias_CUETP8M1_13TeV-pythia8_CASTORmeasured_newCASTORnoise_RECO_94.root') 
 )
 
 # Geometry and Detector Conditions
@@ -44,17 +45,26 @@ process.es_ascii = cms.ESSource("CastorTextCalibrations",
 
 process.es_prefer_castor = cms.ESPrefer('CastorTextCalibrations','es_ascii')
 
+process.load('RecoLocalCalo.Castor.Castor_cff')
+
+process.rechitcorrector = cms.EDProducer("RecHitCorrector",
+            rechitLabel = cms.InputTag("castorreco","",""), # choose the original RecHit collection
+            revertFactor = cms.double(1), # this is the factor to go back to the original fC - not needed when data is already intercalibrated
+            doInterCalib = cms.bool(False) # don't do intercalibration, RecHitCorrector will only correct the EM response and remove BAD channels
+    )
+process.CastorTowerReco.inputprocess = "rechitcorrector"
+process.CastorReReco = cms.Path(process.rechitcorrector*process.CastorFullReco)
+
 # for MC reproduce the CastorTowers and CastorJets to remove the bad channels there
-if not isData:
-    process.load('RecoLocalCalo.Castor.Castor_cff')
-    process.CastorReReco = cms.Path(process.CastorFullReco)
+#if not isData:
+#    process.load('RecoLocalCalo.Castor.Castor_cff')
+#    process.CastorReReco = cms.Path(process.CastorFullReco)
 
 # produce HF PFClusters
 process.PFClustersHF = cms.Path(process.particleFlowRecHitHF*process.particleFlowClusterHF)
 
 # in data produce Tracker RecHits
-if isData:
-    process.PixelRecHits = cms.Path(process.siPixelRecHits)
+process.PixelRecHits = cms.Path(process.siPixelRecHits)
 process.StripMatchedRecHits = cms.Path(process.siStripMatchedRecHits)
 
 if not isData:
@@ -84,14 +94,14 @@ import CommonFSQFramework.Core.PFObjectsViewsConfigs
 import CommonFSQFramework.Core.TriggerResultsViewsConfigs
 
 if not isData:
-    process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.VerticesViewsConfigs.get(["VerticesView","ZeroTeslaVertexView_Pixel_PreSplitting","ZeroTeslaVertexView_Pixel_noPreSplitting","ZeroTeslaVertexView_Strips"]))
+    process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.VerticesViewsConfigs.get(["VerticesView","ZeroTeslaVertexView_Pixel_noPreSplitting","ZeroTeslaVertexView_Strips"]))
 if isData:
     process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.VerticesViewsConfigs.get(["VerticesView","ZeroTeslaVertexView_Pixel_noPreSplitting","ZeroTeslaVertexView_Strips"]))
 
 process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.CaloRecHitViewsConfigs.get(["EcalRecHitView","HBHERecHitView","HFRecHitView"]))
 process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.CaloTowerViewsConfigs.get(["CaloTowerView"]))
 process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.CastorViewsConfigs.get(["CastorRecHitViewFull","CastorTowerView","ak5CastorJetView"]))
-process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.PFObjectsViewsConfigs.get(["PFCandidateView","ecalPFClusterView","hcalPFClusterView","hfPFClusterView"]))
+process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.PFObjectsViewsConfigs.get(["ecalPFClusterView","hcalPFClusterView","hfPFClusterView"]))
 process.CFFTree._Parameterizable__setParameters(CommonFSQFramework.Core.TriggerResultsViewsConfigs.get(["CastorSpecialJetTriggerResultsView","L1GTriggerResultsView"]))
 
 if isData:
@@ -106,8 +116,7 @@ if not isData:
     process = CommonFSQFramework.Core.customizePAT.addPath(process, process.LowPtGenJetsReCluster)
 
 process = CommonFSQFramework.Core.customizePAT.addPath(process, process.PFClustersHF)
-if isData:
-    process = CommonFSQFramework.Core.customizePAT.addPath(process, process.PixelRecHits)
+process = CommonFSQFramework.Core.customizePAT.addPath(process, process.PixelRecHits)
 process = CommonFSQFramework.Core.customizePAT.addPath(process, process.StripMatchedRecHits)
 
 process = CommonFSQFramework.Core.customizePAT.addTreeProducer(process, process.CFFTree)
