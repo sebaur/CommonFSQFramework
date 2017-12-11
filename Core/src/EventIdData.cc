@@ -230,9 +230,13 @@ void EventIdData::fillSpecific(const edm::Event& iEvent, const edm::EventSetup& 
     if ( beamSpotHandle.isValid() )
     {
         beamSpot = *beamSpotHandle;
-        setF("beamspotx",beamSpot.x0());
-        setF("beamspoty",beamSpot.y0());
-        setF("beamspotz",beamSpot.z0());
+        //setF("beamspotx",beamSpot.x0());
+        //setF("beamspoty",beamSpot.y0());
+        //setF("beamspotz",beamSpot.z0());
+        // hardcoded beamspot for data
+        setF("beamspotx",0.066);
+        setF("beamspoty",0.1);
+        setF("beamspotz",-1.8);
     }
 
 }

@@ -145,7 +145,8 @@ void ZeroTeslaVertexView::fillSpecific(const edm::Event& iEvent, const edm::Even
     }
 
     // Calculate vertices
-    LineTrackingProducer theProducer(m_usePixels, beamSpot.x0(), beamSpot.y0());
+    //LineTrackingProducer theProducer(m_usePixels, beamSpot.x0(), beamSpot.y0());
+    LineTrackingProducer theProducer(m_usePixels, 0.066, 0.1); // hardcoded Beamspot for data
     if (m_usePixels) theProducer.run(RawPixelRecHits);
     if (!m_usePixels) theProducer.run(RawStripRecHits);
 

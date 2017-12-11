@@ -208,6 +208,66 @@ sam["data_ZeroBias_27Jan2016_LHCf"]["XS"]=-1
 sam["data_ZeroBias_27Jan2016_LHCf"]["pathPAT"]='/XXXTMFPAT/store/user/sbaur/ZeroBiasAll/ZeroBias-27Jan2016_LHCf_CFF'
 sam["data_ZeroBias_27Jan2016_LHCf"]["DS"]='/ZeroBias1/Run2015A-27Jan2016-v1/RECO'
 
+##################################################
+###### dN/deta Run ###############################
+##################################################
+
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]={}
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["crabJobs"]=0
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["GT"]='74X_dataRun2_Prompt_v2'
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["name"]='data_L1TechBPTXMinusOnly_Feb2016_dNdeta'
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["isData"]=True
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["numEvents"]=-1
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["pathSE"]='srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/sbaur/L1TechBPTXMinusOnly/L1TechBPTXMinusOnly-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142319/0000/'
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["pathTrees"]='/XXXTMFTTree/store/user/sbaur/L1TechBPTXMinusOnly/L1TechBPTXMinusOnly-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142319/0000/'
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["json"]='CommonFSQFramework/Skim/lumi/Run2015A_lowPU_B0T_247324.json'
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["lumiMinBias"]=-1
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["XS"]=-1
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["pathPAT"]='/XXXTMFPAT/store/user/sbaur/L1TechBPTXMinusOnly/L1TechBPTXMinusOnly-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142319/0000/'
+sam["data_L1TechBPTXMinusOnly_Feb2016_dNdeta"]["DS"]='/L1TechBPTXMinusOnly/Run2015A-PromptReco-v1/RECO'
+
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]={}
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["crabJobs"]=0
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["GT"]='74X_dataRun2_Prompt_v2'
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["name"]='data_L1TechBPTXPlusOnly_Feb2016_dNdeta'
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["isData"]=True
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["numEvents"]=-1
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["pathSE"]='srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/sbaur/L1TechBPTXPlusOnly/L1TechBPTXPlusOnly-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142250/0000'
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["pathTrees"]='/XXXTMFTTree/store/user/sbaur/L1TechBPTXPlusOnly/L1TechBPTXPlusOnly-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142250/0000/'
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["json"]='CommonFSQFramework/Skim/lumi/Run2015A_lowPU_B0T_247324.json'
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["lumiMinBias"]=-1
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["XS"]=-1
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["pathPAT"]='/XXXTMFPAT/store/user/sbaur/L1TechBPTXPlusOnly/L1TechBPTXPlusOnly-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142250/0000/'
+sam["data_L1TechBPTXPlusOnly_Feb2016_dNdeta"]["DS"]='/L1TechBPTXPlusOnly/Run2015A-PromptReco-v1/RECO'
+
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]={}
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["crabJobs"]=0
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["GT"]='74X_dataRun2_Prompt_v2'
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["name"]='data_L1TechBPTXQuiet_dNdeta'
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["isData"]=True
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["numEvents"]=-1
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["pathSE"]='srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/sbaur/L1TechBPTXQuiet/L1TechBPTXQuiet-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142346/0000/'
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["pathTrees"]='/XXXTMFTTree/store/user/sbaur/L1TechBPTXQuiet/L1TechBPTXQuiet-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142346/0000/'
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["json"]='CommonFSQFramework/Skim/lumi/Run2015A_lowPU_B0T_247324.json'
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["lumiMinBias"]=-1
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["XS"]=-1
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["pathPAT"]='/XXXTMFPAT/store/user/sbaur/L1TechBPTXQuiet/L1TechBPTXQuiet-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142346/0000/'
+sam["data_L1TechBPTXQuiet_Feb2016_dNdeta"]["DS"]='/L1TechBPTXQuiet/Run2015A-PromptReco-v1/RECO'
+
+sam["data_ZeroBias1_Feb2016_dNdeta"]={}
+sam["data_ZeroBias1_Feb2016_dNdeta"]["crabJobs"]=0
+sam["data_ZeroBias1_Feb2016_dNdeta"]["GT"]='74X_dataRun2_Prompt_v2_dNdeta'
+sam["data_ZeroBias1_Feb2016_dNdeta"]["name"]='data_ZeroBias1'
+sam["data_ZeroBias1_Feb2016_dNdeta"]["isData"]=True
+sam["data_ZeroBias1_Feb2016_dNdeta"]["numEvents"]=-1
+sam["data_ZeroBias1_Feb2016_dNdeta"]["pathSE"]='srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/sbaur/ZeroBias1/ZeroBias-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142130/0000/'
+sam["data_ZeroBias1_Feb2016_dNdeta"]["pathTrees"]='/XXXTMFTTree/store/user/sbaur/ZeroBias1/ZeroBias-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142130/0000/'
+sam["data_ZeroBias1_Feb2016_dNdeta"]["json"]='CommonFSQFramework/Skim/lumi/Run2015A_lowPU_B0T.json'
+sam["data_ZeroBias1_Feb2016_dNdeta"]["lumiMinBias"]=-1
+sam["data_ZeroBias1_Feb2016_dNdeta"]["XS"]=-1
+sam["data_ZeroBias1_Feb2016_dNdeta"]["pathPAT"]='/XXXTMFPAT/store/user/sbaur/ZeroBias1/ZeroBias-PromptReco_Run2015A_lowPU_intercalibFeb2016_dNdeta/160304_142130/0000/'
+sam["data_ZeroBias1_Feb2016_dNdeta"]["DS"]='/ZeroBias1/Run2015A-PromptReco-v1/RECO'
+
 
 def fixLocalPaths(sam):
         import os,imp

@@ -48,10 +48,16 @@ LineTrackingProducer::LineTrackingProducer
     nRounds = 2;
   }
 
-/*
-  // read masks
+
+  // read masks 
+  /* does not work with crab
   ifstream file;
-  file.open("data/diffids.dat");
+  file.open("data/customcond/pixel/badModules.txt");
+
+  if (!file) {
+    throw "Could not open file!";
+  }
+
   while(!file.eof())
   {
     string type, s;
@@ -63,7 +69,7 @@ LineTrackingProducer::LineTrackingProducer
     file >> dec >> n;
 
     if(!file.eof()) {
-        if( ( usePixelHits && type == "pixel") ||
+        if( ( usePixelHits && type == "Pixel") ||
             (!usePixelHits && type == "strip") ) {
             mask.push_back(id);
         }
@@ -71,8 +77,185 @@ LineTrackingProducer::LineTrackingProducer
   }
   file.close();
 */
-  sort(mask.begin(), mask.end());
 
+  // for crab -> hardcode
+    {
+    stringstream bad("12010818");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12030914");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020920");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12021820");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020810");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020b1c");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("1202151c");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020d04");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020d08");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020d0c");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020d10");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020e04");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020e08");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020e0c");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020e10");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12010818");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020810");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020710");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("2020d14");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12030914");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12032c18");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12032220");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12030808");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12020408");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12021604");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12010204");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12011118");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12031e18");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+    {
+    stringstream bad("12030918");
+    unsigned long int id;
+    bad >> hex >> id;
+    mask.push_back(id);
+    }
+
+
+  sort(mask.begin(), mask.end());
 
   if(usePixelHits)
     theSeeding = new Seeding(maxAngle);
@@ -109,13 +292,15 @@ int LineTrackingProducer::readHits(std::vector<RawPixelRecHit> RawPixelRecHits,
 
         double r = sqrt(sqr(x) + sqr(y));
 
-        if(usePixelHits)
-        if(sub == 2 ||                                   // all PXF
-           fabs(ny - 2*fabs(z/r)) < maxClusterWidthDiff) // selected PXB
-        if(find(mask.begin(), mask.end(), id) == mask.end())
-        {
-          TVector3 hit(x,y,z);
-          points.push_back(hit);
+        if(usePixelHits){
+            if(sub == 2 ||                                   // all PXF
+               fabs(ny - 2*fabs(z/r)) < maxClusterWidthDiff){ // selected PXB
+                    if(find(mask.begin(), mask.end(), id) == mask.end())
+                    {
+                        TVector3 hit(x,y,z);
+                        points.push_back(hit);
+                    }
+            }
         }
     }
   return i; // return number of processed RecHits

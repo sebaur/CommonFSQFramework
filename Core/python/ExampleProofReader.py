@@ -326,7 +326,7 @@ class ExampleProofReader( ROOT.TPySelector ):
 
         cwd = os.getcwd()+"/"
         treeFilesAndNormalizations = getTreeFilesAndNormalizations(maxFilesMC=maxFilesMC,
-                                maxFilesData=maxFilesData, samplesToProcess=sampleList, usePickle=usePickle)
+                                maxFilesData=maxFilesData, samplesToProcess=sampleList, usePickle=usePickle, donotvalidate=True)
 
         if sampleList == None:
             todo = treeFilesAndNormalizations.keys() # run them all
